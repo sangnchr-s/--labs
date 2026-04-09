@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <title>04-02</title>
+    <style>
+        label {
+            display: block;
+            margin-top: 4px;
+        }
+
+        button {
+            margin-top: 6px;
+        }
+
+        #result {
+            padding: 8px;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <h2>GET</h2>
+        <button id="btnGet">Получить все</button>
+
+        <h2>POST</h2>
+        <label>name: <input id="postName" type="text"></label><br>
+        <label>bday: <input id="postBday" type="text"></label><br>
+        <button id="btnPost">Добавить</button>
+
+        <h2>PUT</h2>
+        <label>id: <input id="putId" type="number"></label><br>
+        <label>name: <input id="putName" type="text"></label><br>
+        <label>bday: <input id="putBday" type="text"></label><br>
+        <button id="btnPut">Изменить</button>
+
+        <h2>DELETE</h2>
+        <label>id: <input id="delId" type="number"></label><br>
+        <button id="btnDelete">Удалить</button>
+
+        <h2>Ответ сервера</h2>
+        <pre id="result"></pre>
+    </div>
+
+    <script>
+        var API = '/api/db';
+
+        var resultEl = document.getElementById('result');
+
+        function show(data) {
+            if (typeof data === 'string') {
+                resultEl.textContent = data;
+            } else {
+                resultEl.textContent = JSON.stringify(data, null, 2);
+            }
+        }
+
+        document.getElementById('btnGet').onclick = function () {
+            fetch(API)
+                .then(function (res) { return res.json(); })
+                .then(function (data) { show(data); })
+                .catch(function (e) { show('err: ' + e.message); });
+        };
+
+        document.getElementById('btnPost').onclick = function () {
+            var name = document.getElementById('postName').value.trim();
+            var bday = document.getElementById('postBday').value.trim();
+
+            fetch(API, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ name: name, bday: bday })
+            })
+                .then(res => res.json())   
+                .then(data => show(data)) 
+                .catch(function (e) { show('err: ' + e.message); });
+        };
+
+        document.getElementById('btnPut').onclick = function () {
+            var id = parseInt(document.getElementById('putId').value, 10);
+            var name = document.getElementById('putName').value.trim();
+            var bday = document.getElementById('putBday').value.trim();
+
+            if (!id) {
+                show('Введите id');
+                return;
+            }
+
+            var body = { id: id };
+            if (name !== '') {
+                body.name = name;
+            }
+            if (bday !== '') {
+                body.bday = bday;
+            }
+
+            fetch(API, {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(body)
+            })
+                .then(res => res.json()) 
+                .then(data => show(data)) 
+                .catch(function (e) { show('err: ' + e.message); });
+        };
+
+        document.getElementById('btnDelete').onclick = function () {
+            var id = document.getElementById('delId').value.trim();
+
+            if (!id) {
+                show('Введите id');
+                return;
+            }
+
+            fetch(API + '?id=' + id, { method: 'DELETE' })
+                .then(res => res.json())  
+                .then(data => show(data)) 
+                .catch(function (e) { show('err: ' + e.message); });
+        };
+    </script>
+</body>
+
+</html>

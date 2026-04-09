@@ -1,0 +1,17 @@
+{
+  "name": "@sangnchr/m0603-lab06",
+  "version": "1.0.1",
+  "description": "STSR lab06 module m0603: send() mail via nodemailer",
+  "main": "m0603.js",
+  "files": [
+    "m0603.js"
+  ],
+  "license": "MIT",
+  "scripts": {
+    "start": "node 06-02.js"
+  },
+  "dependencies": {
+    "@sangnchr/m0603-lab06": "^1.0.1",
+    "nodemailer": "^8.0.2"
+  }
+}

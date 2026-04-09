@@ -1,0 +1,22 @@
+{
+  "name": "lab08",
+  "version": "1.0.0",
+  "description": "",
+  "main": "08-00.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon 08-00.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "multiparty": "^4.2.3",
+    "x2js": "^3.4.4",
+    "xmlbuilder": "^15.1.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.14"
+  }
+}

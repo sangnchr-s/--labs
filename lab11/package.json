@@ -1,0 +1,10 @@
+{
+  "name": "lab11-ws-upload",
+  "private": true,
+  "type": "commonjs",
+  "dependencies": {
+    "async": "^3.2.6",
+    "rpc-websockets": "^9.3.7",
+    "ws": "^8.18.0"
+  }
+}

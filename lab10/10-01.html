@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <title>10-01</title>
+  <style>
+    #log { white-space: pre-line; }
+  </style>
+</head>
+<body>
+  <h1>10-01</h1>
+  <button type="button" onclick="startWS()">startWS</button>
+  <div id="log"></div>
+  <script>
+    let n = 0; 
+
+    function appendLog(line) {
+      const el = document.getElementById('log');
+      el.textContent += line + '\n';
+    }
+
+    function startWS() {
+      const socket = new WebSocket('ws://localhost:4010/wsserver'); 
+      let sendTimer = null; 
+      let stopTimer = null; 
+
+      socket.onopen = function () { 
+        n += 1;
+        socket.send('10-01-client: ' + n);
+        sendTimer = setInterval(function () {
+          n += 1;
+          socket.send('10-01-client: ' + n);
+        }, 3000);
+        stopTimer = setTimeout(function () {
+          if (sendTimer !== null) {
+            clearInterval(sendTimer);
+            sendTimer = null;
+          }
+          appendLog('соединение закрыто!');
+          socket.close();
+        }, 25000);
+      };
+
+      socket.onmessage = function (e) { 
+        appendLog(String(e.data));
+      };
+
+      socket.onclose = function () {
+        if (sendTimer !== null) {
+          clearInterval(sendTimer);
+          sendTimer = null;
+        }
+        if (stopTimer !== null) {
+          clearTimeout(stopTimer);
+          stopTimer = null;
+        }
+      };
+
+      socket.onerror = function () {
+        alert('ошибка WebSocket');
+      };
+    }
+  </script>
+</body>
+</html>

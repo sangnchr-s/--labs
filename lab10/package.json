@@ -1,0 +1,16 @@
+{
+  "name": "lab10-01",
+  "version": "1.0.0",
+  "private": true,
+  "description": "HTTP + WebSocket labs 10-01, 10-02, 10-03",
+  "main": "10-01.js",
+  "scripts": {
+    "start": "node 10-01.js",
+    "client": "node 10-02.js",
+    "broadcast": "node 10-03.js",
+    "client-broadcast": "node 10-03a.js"
+  },
+  "dependencies": {
+    "ws": "^8.18.0"
+  }
+}

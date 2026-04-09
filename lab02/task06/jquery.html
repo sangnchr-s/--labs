@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>task06</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+</head>
+<body>
+    <p id="name"></p>
+
+    <script>
+    $.ajax({
+      url: '/api/name',
+      method: 'GET',
+      success: (data) => {
+        $('#name').text(data);
+        console.log('/api/name');
+      },
+      error: () => {
+        $('#name').text('Ошибка загрузки');
+      }
+    });
+  </script>
+    
+</body>
+</html>

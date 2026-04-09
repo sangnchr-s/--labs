@@ -1,0 +1,10 @@
+{
+  "name": "lab09",
+  "private": true,
+  "type": "commonjs",
+  "dependencies": {
+    "multiparty": "^4.2.3",
+    "x2js": "^3.4.4",
+    "xmlbuilder": "^15.1.1"
+  }
+}
