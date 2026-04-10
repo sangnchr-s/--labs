@@ -1,0 +1,9 @@
+{
+  "name": "lab12",
+  "version": "1.0.0",
+  "private": true,
+  "dependencies": {
+    "rpc-websockets": "^9.3.7",
+    "ws": "^8.18.0"
+  }
+}
