@@ -1,0 +1,111 @@
+USE master;
+GO
+
+IF DB_ID('GAS') IS NOT NULL
+BEGIN
+    ALTER DATABASE GAS SET SINGLE_USER WITH ROLLBACK IMMEDIATE;
+    DROP DATABASE GAS;
+END
+GO
+
+CREATE DATABASE GAS;
+GO
+
+USE GAS;
+GO
+
+CREATE TABLE FACULTY
+(
+    FACULTY      VARCHAR(20) PRIMARY KEY,
+    FACULTY_NAME VARCHAR(100) NOT NULL
+);
+GO
+
+CREATE TABLE PULPIT
+(
+    PULPIT      VARCHAR(20) PRIMARY KEY,
+    PULPIT_NAME VARCHAR(100) NOT NULL,
+    FACULTY     VARCHAR(20) NOT NULL,
+    CONSTRAINT FK_PULPIT_FACULTY
+        FOREIGN KEY (FACULTY) REFERENCES FACULTY(FACULTY)
+);
+GO
+
+CREATE TABLE TEACHER
+(
+    TEACHER      VARCHAR(20) PRIMARY KEY,
+    TEACHER_NAME VARCHAR(100) NOT NULL,
+    PULPIT       VARCHAR(20) NOT NULL,
+    CONSTRAINT FK_TEACHER_PULPIT
+        FOREIGN KEY (PULPIT) REFERENCES PULPIT(PULPIT)
+);
+GO
+
+CREATE TABLE SUBJECT
+(
+    SUBJECT      VARCHAR(20) PRIMARY KEY,
+    SUBJECT_NAME VARCHAR(100) NOT NULL,
+    PULPIT       VARCHAR(20) NOT NULL,
+    CONSTRAINT FK_SUBJECT_PULPIT
+        FOREIGN KEY (PULPIT) REFERENCES PULPIT(PULPIT)
+);
+GO
+
+CREATE TABLE AUDITORIUM_TYPE
+(
+    AUDITORIUM_TYPE     VARCHAR(20) PRIMARY KEY,
+    AUDITORIUM_TYPENAME VARCHAR(100) NOT NULL
+);
+GO
+
+CREATE TABLE AUDITORIUM
+(
+    AUDITORIUM          VARCHAR(20) PRIMARY KEY,
+    AUDITORIUM_NAME     VARCHAR(100) NOT NULL,
+    AUDITORIUM_CAPACITY INT NOT NULL,
+    AUDITORIUM_TYPE     VARCHAR(20) NOT NULL,
+    CONSTRAINT FK_AUDITORIUM_TYPE
+        FOREIGN KEY (AUDITORIUM_TYPE) REFERENCES AUDITORIUM_TYPE(AUDITORIUM_TYPE)
+);
+GO
+
+INSERT INTO FACULTY (FACULTY, FACULTY_NAME)
+VALUES ('FCS', 'Faculty of Computer Systems'),
+       ('FIF', 'Faculty of Information Technologies'),
+       ('FRE', 'Faculty of Radio Engineering');
+GO
+
+INSERT INTO PULPIT (PULPIT, PULPIT_NAME, FACULTY)
+VALUES ('CS',  'Computer Science',      'FCS'),
+       ('IS',  'Information Systems',   'FIF'),
+       ('SE',  'Software Engineering',  'FIF'),
+       ('RT',  'Radio Technologies',    'FRE');
+GO
+
+INSERT INTO TEACHER (TEACHER, TEACHER_NAME, PULPIT)
+VALUES ('T1', 'Ivanov I.I.',   'CS'),
+       ('T2', 'Petrov P.P.',   'IS'),
+       ('T3', 'Sidorov S.S.',  'SE'),
+       ('T4', 'Smirnov A.A.',  'RT');
+GO
+
+INSERT INTO SUBJECT (SUBJECT, SUBJECT_NAME, PULPIT)
+VALUES ('DB',  'Databases',                'CS'),
+       ('ALG', 'Algorithms',               'CS'),
+       ('WEB', 'Web Development',          'SE'),
+       ('NET', 'Computer Networks',        'IS'),
+       ('DSP', 'Digital Signal Processing','RT');
+GO
+
+INSERT INTO AUDITORIUM_TYPE (AUDITORIUM_TYPE, AUDITORIUM_TYPENAME)
+VALUES ('LEC', 'Lecture room'),
+       ('LAB', 'Laboratory'),
+       ('PRC', 'Practice room');
+GO
+
+INSERT INTO AUDITORIUM (AUDITORIUM, AUDITORIUM_NAME, AUDITORIUM_CAPACITY, AUDITORIUM_TYPE)
+VALUES ('A101', 'Main lecture hall', 120, 'LEC'),
+       ('A202', 'Database lab',       30, 'LAB'),
+       ('A203', 'Programming lab',    25, 'LAB'),
+       ('A305', 'Practice room',      35, 'PRC');
+GO

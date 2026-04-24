@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>14-01 Pulpits Client</title>
+    <style>
+      body {
+        margin: 24px;
+        font-family: Arial, sans-serif;
+      }
+      .row {
+        margin: 16px 0;
+      }
+      input,
+      button {
+        padding: 6px 8px;
+        margin: 0 8px 8px 0;
+      }
+      button {
+        cursor: pointer;
+      }
+      pre {
+        padding: 12px;
+        background: #f4f4f4;
+        overflow: auto;
+      }
+      .error {
+        color: #b00;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Лабораторная 14-01: PULPIT API</h1>
+    <p>Запросы к API: GET /api/pulpits, POST /api/pulpits, PUT /api/pulpits, DELETE /api/pulpits/xyz.</p>
+
+    <div class="row">
+      <button id="btnGet">GET /api/pulpits</button>
+    </div>
+
+    <div class="row">
+      <h3>POST /api/pulpits</h3>
+      <input id="postPulpit" placeholder="pulpit (код)" />
+      <input id="postPulpitName" placeholder="pulpit_name (название)" />
+      <input id="postFaculty" placeholder="faculty (код факультета)" />
+      <button id="btnPost">Добавить кафедру</button>
+    </div>
+
+    <div class="row">
+      <h3>PUT /api/pulpits</h3>
+      <input id="putPulpit" placeholder="pulpit (код)" />
+      <input id="putPulpitName" placeholder="pulpit_name (новое название)" />
+      <input id="putFaculty" placeholder="faculty (код факультета)" />
+      <button id="btnPut">Изменить кафедру</button>
+    </div>
+
+    <div class="row">
+      <h3>DELETE /api/pulpits/xyz</h3>
+      <input id="deletePulpit" placeholder="xyz (код кафедры)" />
+      <button id="btnDelete">Удалить кафедру</button>
+    </div>
+
+    <h3>Ответ сервера</h3>
+    <pre id="result"></pre>
+
+    <h3>Ошибка</h3>
+    <pre id="error" class="error"></pre>
+
+    <script>
+      const resultEl = document.getElementById("result");
+      const errorEl = document.getElementById("error");
+
+      const showResult = (data) => {
+        resultEl.textContent = JSON.stringify(data, null, 2);
+      };
+
+      const showError = (message) => {
+        errorEl.textContent = message;
+      };
+
+      const clearOutput = () => {
+        resultEl.textContent = "";
+        errorEl.textContent = "";
+      };
+
+      const sendJsonRequest = (url, method, body) => {
+        clearOutput();
+        const options = {
+          method: method,
+          headers: { "Content-Type": "application/json" },
+        };
+        if (body) {
+          options.body = JSON.stringify(body);
+        }
+
+        fetch(url, options)
+          .then((response) =>
+            response.text().then((text) => ({
+              ok: response.ok,
+              status: response.status,
+              text: text,
+            }))
+          )
+          .then((payload) => {
+            let data = null;
+            try {
+              data = payload.text ? JSON.parse(payload.text) : {};
+            } catch (e) {
+              data = { raw: payload.text };
+            }
+
+            if (!payload.ok) {
+              showError((data && data.error) || `Ошибка HTTP ${payload.status}`);
+              if (data) showResult(data);
+              return;
+            }
+
+            showResult(data);
+          })
+          .catch((e) => {
+            showError(e.message);
+          });
+      };
+
+      document.getElementById("btnGet").addEventListener("click", () => {
+        sendJsonRequest("/api/pulpits", "GET");
+      });
+
+      document.getElementById("btnPost").addEventListener("click", () => {
+        const body = {
+          pulpit: document.getElementById("postPulpit").value.trim(),
+          pulpit_name: document.getElementById("postPulpitName").value.trim(),
+          faculty: document.getElementById("postFaculty").value.trim(),
+        };
+        sendJsonRequest("/api/pulpits", "POST", body);
+      });
+
+      document.getElementById("btnPut").addEventListener("click", () => {
+        const body = {
+          pulpit: document.getElementById("putPulpit").value.trim(),
+          pulpit_name: document.getElementById("putPulpitName").value.trim(),
+          faculty: document.getElementById("putFaculty").value.trim(),
+        };
+        sendJsonRequest("/api/pulpits", "PUT", body);
+      });
+
+      document.getElementById("btnDelete").addEventListener("click", () => {
+        const code = document.getElementById("deletePulpit").value.trim();
+        sendJsonRequest(`/api/pulpits/${encodeURIComponent(code)}`, "DELETE");
+      });
+    </script>
+  </body>
+</html>
