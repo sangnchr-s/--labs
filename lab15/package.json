@@ -1,0 +1,14 @@
+{
+  "name": "lab15",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Лабораторная 15: MongoDB + HTTP API",
+  "main": "15-01.js",
+  "scripts": {
+    "start": "node 15-01.js",
+    "15-01": "node 15-01.js"
+  },
+  "dependencies": {
+    "mongodb": "^6.21.0"
+  }
+}
