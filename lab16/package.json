@@ -1,0 +1,13 @@
+{
+  "name": "lab16",
+  "version": "1.0.0",
+  "private": true,
+  "type": "commonjs",
+  "scripts": {
+    "start": "node 16-01.js"
+  },
+  "dependencies": {
+    "graphql": "^16.11.0",
+    "mssql": "^12.3.1"
+  }
+}
