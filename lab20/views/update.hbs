@@ -1,0 +1,21 @@
+<div class="list-panel">
+  {{#each entries}}
+  {{> entry-row name=this.name phone=this.phone disabled=true}}
+  {{/each}}
+</div>
+<form id="update-form" class="edit-panel" method="post" action="/Update">
+  <input type="hidden" name="index" value="{{selectedIndex}}">
+  <div class="edit-line">
+    <input id="entry-name" type="text" name="name" value="{{selectedName}}" required>
+    <input id="entry-phone" type="text" name="phone" value="{{selectedPhone}}" required>
+  </div>
+</form>
+<form id="delete-form" method="post" action="/Delete">
+  <input type="hidden" name="index" value="{{selectedIndex}}">
+</form>
+<div class="btn-row">
+  <button type="submit" form="update-form">Изменить</button>
+  <button id="delete-btn" type="submit" form="delete-form">Удалить</button>
+  {{{cancelButton "/"}}}
+</div>
+<script src="/js/update.js"></script>

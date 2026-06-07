@@ -1,0 +1,17 @@
+{
+  "name": "lab21",
+  "version": "1.0.0",
+  "description": "Лабораторная работа 21 — HTTP-аутентификация",
+  "scripts": {
+    "01": "node 21-01/21-01.js",
+    "02": "node 21-02/21-02.js",
+    "03": "node 21-03/21-03.js"
+  },
+  "dependencies": {
+    "cookie-parser": "^1.4.7",
+    "express": "^4.21.2",
+    "express-session": "^1.18.1",
+    "passport": "^0.7.0",
+    "passport-http": "^0.3.0"
+  }
+}

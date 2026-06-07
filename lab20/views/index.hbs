@@ -1,0 +1,8 @@
+<div class="list-panel">
+  {{#each entries}}
+  {{> entry-row name=this.name phone=this.phone index=@index disabled=false}}
+  {{/each}}
+</div>
+<div class="actions">
+  <a class="btn-wide" href="/Add">Добавить</a>
+</div>

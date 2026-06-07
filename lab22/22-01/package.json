@@ -1,0 +1,12 @@
+{
+  "name": "22-01",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node app.js",
+    "start:gnm": "node app-gnm.js"
+  },
+  "dependencies": {
+    "express": "^4.21.2"
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "name": "lab23",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Лабораторная работа 25 — JSON-RPC",
+  "main": "25-01.js",
+  "scripts": {
+    "start": "node 25-01.js"
+  },
+  "dependencies": {
+    "jsonrpc-server-http-nats": "^0.1.14"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "lab19-01",
+  "version": "1.0.0",
+  "description": "Express HTTP server with MVC routing and controller tables",
+  "main": "19-01.js",
+  "scripts": {
+    "start": "node 19-01.js"
+  },
+  "dependencies": {
+    "express": "^4.22.2"
+  }
+}

@@ -1,0 +1,4 @@
+**/out/
+22-01/certs/*.key
+22-01/certs/*.crt
+!22-01/certs/README.md

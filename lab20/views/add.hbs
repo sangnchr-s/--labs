@@ -1,0 +1,15 @@
+<div class="list-panel">
+  {{#each entries}}
+  {{> entry-row name=this.name phone=this.phone disabled=true}}
+  {{/each}}
+</div>
+<form id="add-form" class="edit-panel" method="post" action="/Add">
+  <div class="edit-line">
+    <input type="text" name="name" placeholder="Фамилия, имя, отчество" required>
+    <input type="text" name="phone" placeholder="Телефон" required>
+  </div>
+</form>
+<div class="btn-row">
+  <button type="submit" form="add-form">Добавить</button>
+  {{{cancelButton "/"}}}
+</div>

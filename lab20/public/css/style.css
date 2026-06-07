@@ -1,0 +1,84 @@
+.page {
+  width: 400px;
+  margin: 20px auto;
+}
+
+.list-panel {
+  border: 1px solid #000;
+  height: 200px;
+  overflow-y: scroll;
+  padding: 5px;
+}
+
+.entry-row {
+  display: block;
+  border: 1px solid #000;
+  margin-bottom: 5px;
+  padding: 5px;
+  text-decoration: none;
+  color: #000;
+}
+
+.entry-row .phone {
+  float: right;
+}
+
+.entry-row.disabled {
+  pointer-events: none;
+  background: #ccc;
+}
+
+.actions {
+  margin-top: 10px;
+}
+
+.btn-wide {
+  display: block;
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #000;
+  text-align: center;
+  text-decoration: none;
+  color: #000;
+  background: #fff;
+  box-sizing: border-box;
+}
+
+.edit-panel {
+  margin-top: 10px;
+  border: 1px solid #000;
+  padding: 5px;
+}
+
+.edit-line {
+  display: flex;
+  gap: 5px;
+}
+
+.edit-line input {
+  flex: 1;
+  width: 0;
+  padding: 5px;
+  border: 1px solid #000;
+  box-sizing: border-box;
+}
+
+.btn-row {
+  display: flex;
+  gap: 5px;
+  margin-top: 10px;
+}
+
+.btn-row button,
+.btn-row .btn-wide {
+  flex: 1;
+  padding: 8px;
+  border: 1px solid #000;
+  text-align: center;
+  background: #fff;
+  box-sizing: border-box;
+}
+
+.btn-row button:disabled {
+  color: #888;
+}
